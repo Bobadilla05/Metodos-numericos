@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajuste de curvas | Unidad 7.1</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--bg:#0b1220;--panel:#121e32;--panel2:#192943;--text:#edf4ff;--muted:#a9bad2;--accent:#63d5c2;--line:#2b3c56}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#0b1220,#101d32);color:var(--text);font:16px/1.6 system-ui,Segoe UI,Arial}
+header{padding:58px 7vw 48px;background:radial-gradient(circle at 85% 15%,#1c665e 0,transparent 32%),linear-gradient(120deg,#101d32,#142943);border-bottom:1px solid var(--line)}
+nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:35px}nav a{color:var(--muted);text-decoration:none;font-size:.94rem}nav a:hover{color:var(--accent)}
+.tag{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem}
+h1{font-size:clamp(2.2rem,6vw,4.5rem);line-height:1.05;margin:12px 0}h2{font-size:1.8rem;margin:0 0 14px}h3{margin:0 0 8px}p{color:var(--muted);margin-top:6px}
+.wrap{max-width:1120px;margin:auto;padding:42px 22px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 10px 30px #0002}
+.card strong,.accent{color:var(--accent)}.formula{font-family:Georgia,serif;font-size:1.35rem;color:#fff;background:var(--panel2);padding:14px;border-radius:10px;text-align:center}
+section{scroll-margin-top:20px}.muted{color:var(--muted)}.small{font-size:.88rem}
+label{display:block;color:var(--muted);font-size:.9rem;margin:10px 0 5px}
+input,select,button{font:inherit;border-radius:9px;border:1px solid var(--line);padding:10px 12px;background:#0d192b;color:var(--text)}
+input{width:100%}button{background:var(--accent);color:#06201c;border:0;font-weight:700;cursor:pointer}button:hover{filter:brightness(1.08)}
+.controls{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+canvas{max-height:360px;background:#0e1929;border-radius:12px;padding:12px;margin-top:15px}
+.result{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}.pill{background:#203b4b;border:1px solid #315b65;border-radius:99px;padding:7px 12px;font-size:.9rem}
+a{color:var(--accent)}.ref{margin:12px 0}.ref p{margin:5px 0}
+footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:650px){.controls{grid-template-columns:1fr}.wrap{padding:30px 16px}}
+</style>
+</head>
+<body>
+<header>
+<nav><a href="#concepto">Concepto</a><a href="#metodos">Métodos</a><a href="#aplicaciones">Aplicaciones</a><a href="#simulador">Simulador</a><a href="#referencias">Referencias</a></nav>
+<div class="tag">Unidad 7 · Métodos numéricos</div>
+<h1>Ajuste de curvas</h1>
+<p style="max-width:720px;color:#d0deef;font-size:1.15rem">De los datos a los modelos: comprende cómo las matemáticas ayudan a describir y predecir el comportamiento de los sistemas computacionales.</p>
+</header>
+<main>
+<section id="concepto" class="wrap">
+<div class="tag">01 · Fundamentos</div><h2>¿Qué es el ajuste de curvas?</h2>
+<p>Es un procedimiento matemático que encuentra una función que representa de manera aproximada la relación entre un conjunto de datos. La función permite describir tendencias, estimar valores y hacer predicciones dentro de un contexto determinado.</p>
+<div class="formula">y = f(x) + ε</div>
+<p><b class="accent">x</b> representa la variable independiente, <b class="accent">y</b> los valores observados y <b class="accent">ε</b> el error o variación que el modelo no explica.</p>
+</section>
+<section id="metodos" class="wrap">
+<div class="tag">02 · Técnicas</div><h2>Métodos comunes</h2>
+<div class="grid">
+<article class="card"><h3>Ajuste lineal</h3><p>Representa una tendencia mediante una recta.</p><div class="formula">y = a + bx</div></article>
+<article class="card"><h3>Ajuste polinomial</h3><p>Representa relaciones curvas mediante potencias de la variable.</p><div class="formula">y = a₀ + a₁x + a₂x²</div></article>
+<article class="card"><h3>Ajuste exponencial</h3><p>Modela crecimientos o disminuciones proporcionales a su valor actual.</p><div class="formula">y = a · eᵇˣ</div></article>
+<article class="card"><h3>Ajuste potencial</h3><p>Modela relaciones donde una variable depende de una potencia de otra.</p><div class="formula">y = a · xᵇ</div></article>
+</div>
+</section>
+<section id="aplicaciones" class="wrap">
+<div class="tag">03 · Ingeniería en sistemas</div><h2>Aplicaciones en sistemas computacionales</h2>
+<div class="grid">
+<article class="card"><h3>Rendimiento del software</h3><p>Relacionar el tamaño de entrada con el tiempo de ejecución para estimar cuánto tardará un programa.</p></article>
+<article class="card"><h3>Redes informáticas</h3><p>Analizar mediciones de tráfico y anticipar periodos de alta demanda o saturación.</p></article>
+<article class="card"><h3>Consumo energético</h3><p>Estudiar cómo cambia el consumo eléctrico al ejecutar programas o utilizar hardware.</p></article>
+<article class="card"><h3>Recursos del sistema</h3><p>Estimar uso de memoria RAM, CPU o almacenamiento ante diferentes cargas de trabajo.</p></article>
+</div>
+</section>
+<section id="simulador" class="wrap">
+<div class="tag">04 · Experimenta</div><h2>Simulador de ajuste polinomial</h2>
+<p>Introduce pares de datos (x, y), separados por comas. El simulador calcula un polinomio de grado 1 o 2 mediante mínimos cuadrados y dibuja la curva aproximada.</p>
+<div class="card">
+<label for="xs">Valores de X</label><input id="xs" value="1,2,3,4,5">
+<label for="ys">Valores de Y</label><input id="ys" value="2,3,5,4,7">
+<div class="controls">
+<div><label for="degree">Grado del polinomio</label><select id="degree"><option value="1">Lineal (grado 1)</option><option value="2" selected>Cuadrático (grado 2)</option></select></div>
+<div><label for="predict">Estimar Y para X =</label><input id="predict" type="number" value="6" step="any"></div>
+<button onclick="calculate()">Calcular ajuste</button>
+</div>
+<div id="message" class="small muted" aria-live="polite"></div>
+<canvas id="chart"></canvas>
+<div class="result"><span class="pill" id="equation">Ecuación: —</span><span class="pill" id="r2">R²: —</span><span class="pill" id="estimate">Predicción: —</span></div>
+</div>
+<p class="small">Nota: el simulador es didáctico. Una predicción fuera del intervalo de datos es una extrapolación y puede ser menos confiable.</p>
+</section>
+<section id="referencias" class="wrap">
+<div class="tag">05 · Investigación</div><h2>Referencias académicas</h2>
+<div class="card ref"><h3>1. Ferreira et al. (2023)</h3><p><i>Forecasting Network Traffic: A Survey and Tutorial with Open-Source Comparative Evaluation.</i> IEEE Access, 11, 6018–6044.</p><p>Revisa modelos estadísticos y redes neuronales para predecir tráfico de red y compara calidad de predicción y costo computacional.</p><a href="https://doi.org/10.1109/ACCESS.2023.3236261" target="_blank" rel="noopener">Consultar DOI</a></div>
+<div class="card ref"><h3>2. Hu, Liu y Huo (2024)</h3><p><i>An intelligent network traffic prediction method based on Butterworth filter and CNN–LSTM.</i> Computer Networks, 240, artículo 110172.</p><p>Combina filtrado y aprendizaje profundo para analizar y predecir el tráfico de redes.</p><a href="https://doi.org/10.1016/j.comnet.2024.110172" target="_blank" rel="noopener">Consultar DOI</a></div>
+<div class="card ref"><h3>3. Learning input-aware performance models (2024)</h3><p><i>Learning input-aware performance models of configurable systems: An empirical evaluation.</i> Journal of Systems and Software, 208, artículo 111883.</p><p>Estudia cómo las entradas y configuraciones de un software afectan el tiempo de ejecución, el consumo de energía y otros indicadores de rendimiento.</p><a href="https://doi.org/10.1016/j.jss.2023.111883" target="_blank" rel="noopener">Consultar DOI</a></div>
+<p class="small">Las investigaciones anteriores tratan predicción y modelado de sistemas; no todas implementan exclusivamente el ajuste polinomial clásico. Se incluyen porque sus problemas pueden analizarse mediante modelos de regresión y ajuste de datos.</p>
+</section>
+</main>
+<footer>Proyecto académico · Unidad 7: Ajuste de curvas · Tema 7.1</footer>
+<script>
+let plot;
+function solve(A,b){
+ const n=b.length; A=A.map((r,i)=>r.slice().concat(b[i]));
+ for(let i=0;i<n;i++){
+  let p=i;for(let k=i+1;k<n;k++)if(Math.abs(A[k][i])>Math.abs(A[p][i]))p=k;
+  if(Math.abs(A[p][i])<1e-12)throw Error("Los datos no permiten calcular ese grado de polinomio.");
+  [A[i],A[p]]=[A[p],A[i]];
+  let d=A[i][i];for(let j=i;j<=n;j++)A[i][j]/=d;
+  for(let k=0;k<n;k++)if(k!==i){let f=A[k][i];for(let j=i;j<=n;j++)A[k][j]-=f*A[i][j];}
+ }
+ return A.map(r=>r[n]);
+}
+function calculate(){
+ const x=document.getElementById('xs').value.split(',').map(Number);
+ const y=document.getElementById('ys').value.split(',').map(Number);
+ const degree=Number(document.getElementById('degree').value);
+ const msg=document.getElementById('message');
+ try{
+  if(x.length!==y.length||x.length<degree+1||x.some(v=>!Number.isFinite(v))||y.some(v=>!Number.isFinite(v)))throw Error("Ingresa la misma cantidad de números válidos en X y Y, y suficientes puntos.");
+  const n=degree+1,A=[],b=[];
+  for(let r=0;r<n;r++){A[r]=[];for(let c=0;c<n;c++)A[r][c]=x.reduce((s,v)=>s+Math.pow(v,r+c),0);b[r]=x.reduce((s,v,i)=>s+y[i]*Math.pow(v,r),0);}
+  const coef=solve(A,b),f=z=>coef.reduce((s,a,i)=>s+a*Math.pow(z,i),0);
+  const mean=y.reduce((s,v)=>s+v,0)/y.length;
+  const ssTot=y.reduce((s,v)=>s+(v-mean)**2,0),ssRes=y.reduce((s,v,i)=>s+(v-f(x[i]))**2,0);
+  const r2=ssTot===0?1:1-ssRes/ssTot;
+  const min=Math.min(...x),max=Math.max(...x),curve=[];
+  for(let i=0;i<=100;i++){let z=min+(max-min)*i/100;curve.push({x:z,y:f(z)});}
+  const points=x.map((v,i)=>({x:v,y:y[i]}));
+  if(plot)plot.destroy();
+  plot=new Chart(document.getElementById('chart'),{type:'scatter',data:{datasets:[
+   {label:'Datos observados',data:points,backgroundColor:'#63d5c2',pointRadius:5},
+   {label:'Curva ajustada',data:curve,showLine:true,borderColor:'#ffbf69',backgroundColor:'transparent',pointRadius:0,borderWidth:2}
+  ]},options:{responsive:true,plugins:{legend:{labels:{color:'#edf4ff'}}},scales:{x:{type:'linear',title:{display:true,text:'X',color:'#edf4ff'},ticks:{color:'#a9bad2'},grid:{color:'#2b3c56'}},y:{title:{display:true,text:'Y',color:'#edf4ff'},ticks:{color:'#a9bad2'},grid:{color:'#2b3c56'}}}}});
+  const terms=coef.map((a,i)=>`${a.toFixed(4)}${i?'x'+(i>1?'^'+i:''):''}`).join(' + ').replace(/\+ -/g,'- ');
+  document.getElementById('equation').textContent='Ecuación: y = '+terms;
+  document.getElementById('r2').textContent='R²: '+r2.toFixed(4);
+  document.getElementById('estimate').textContent='Predicción: '+f(Number(document.getElementById('predict').value)).toFixed(4);
+  msg.textContent='Ajuste calculado correctamente con '+x.length+' observaciones.';
+ }catch(e){msg.textContent=e.message;}
+}
+calculate();
+</script>
+</body></html>
